@@ -357,7 +357,9 @@ public abstract class ChartBaseManager<T extends Chart, U extends Entry> extends
         if (BridgeUtils.validate(propMap, ReadableType.String, "valueFormatter")) {
             String valueFormatter = propMap.getString("valueFormatter");
 
-            if ("largeValue".equals(valueFormatter)) {
+            if("dateValue".equals(valueFormatter)){
+				axis.setValueFormatter(new DateFormatter());
+			} else if ("largeValue".equals(valueFormatter)) {
                 axis.setValueFormatter(new LargeValueFormatter());
             } else if ("percent".equals(valueFormatter)) {
                 axis.setValueFormatter(new PercentFormatter());
@@ -381,6 +383,5 @@ public abstract class ChartBaseManager<T extends Chart, U extends Entry> extends
         chart.setData(getDataExtract().extract(propMap));
         chart.invalidate();
     }
-
 
 }
